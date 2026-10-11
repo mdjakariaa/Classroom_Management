@@ -81,7 +81,7 @@ function App() {
                   </Route>
 
                   <Route path="classes">
-                    <Route index element={<ClassesCreate />} />
+                    <Route index element={<ClassesList />} />
                     <Route path="create" element={<ClassesCreate />} />
                   </Route>
                 </Route>
