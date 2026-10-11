@@ -36,21 +36,19 @@ export const classSchema = z.object({
   description: z
     .string({ required_error: "Description is required" })
     .min(5, "Description must be at least 5 characters"),
-  subjectId: z.preprocess(
-    (val) =>
-      val === "" || val === undefined || val === null ? undefined : Number(val),
-    z
-      .number({ required_error: "Subject is required" })
-      .min(1, "Subject is required"),
-  ),
+  subjectId: z.coerce
+    .number({
+      required_error: "Subject is required",
+      invalid_type_error: "Subject is required",
+    })
+    .min(1, "Subject is required"),
   teacherId: z.string().min(1, "Teacher is required"),
-  capacity: z.preprocess(
-    (val) =>
-      val === "" || val === undefined || val === null ? undefined : Number(val),
-    z
-      .number({ required_error: "Capacity is required" })
-      .min(1, "Capacity must be at least 1"),
-  ),
+  capacity: z.coerce
+    .number({
+      required_error: "Capacity is required",
+      invalid_type_error: "Capacity is required",
+    })
+    .min(1, "Capacity must be at least 1"),
   status: z.enum(["active", "inactive"]),
   bannerUrl: z
     .string({ required_error: "Class banner is required" })
@@ -63,12 +61,11 @@ export const classSchema = z.object({
 });
 
 export const enrollmentSchema = z.object({
-  classId: z.preprocess(
-    (val) =>
-      val === "" || val === undefined || val === null ? undefined : Number(val),
-    z
-      .number({ required_error: "Class ID is required" })
-      .min(1, "Class ID is required"),
-  ),
+  classId: z.coerce
+    .number({
+      required_error: "Class ID is required",
+      invalid_type_error: "Class ID is required",
+    })
+    .min(1, "Class ID is required"),
   studentId: z.string().min(1, "Student ID is required"),
 });
